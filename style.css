@@ -60,21 +60,55 @@ body{
 }
 .stores-list-container{
     position: absolute;
+    overflow-y:scroll;
     z-index: 100;
-    width:400px;
-   
+    width: 370px;
     background-color: white;
     top: 200px;
     left: 100px;
     border-radius: 20px;
     bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
 }
 
 .store-container{
-    padding: 30px;
-    border-bottom: 2px solid grey;;
-}
-.store-phone-number{
-   margin: 15px;
+    display: flex;
 
+ border-bottom: 2px solid grey;;
+}
+
+.store-address{
+    margin-top: 30px;
+}
+
+.store-phone-number{
+    margin-top: 15px;
+   margin-bottom: 15px;
+
+}
+
+.store-address span{
+    display: block;
+}
+.store-number{
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.store-info-container{
+    flex-grow: 1;
+
+}
+.store-number-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
