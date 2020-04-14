@@ -1,13 +1,11 @@
 window.onload=()=>{
-  displayStores();
+  
+ 
 
 }
 var map;
       var markers = [];
       var infoWindow;
-
-
-
 
 function initMap() {
     var losAngeles = {lat:34.063380, lng: -118.358080};
@@ -16,35 +14,44 @@ function initMap() {
       zoom: 11,
       });
       infoWindow = new google.maps.InfoWindow();
+      displayStores();
       showStoresMarker();
-//       var marker = new google.maps.Marker({
-//         position: myLatLng,
-//         map: map,
-//         title: 'Hello World!'
-//       });
+      setOnCLickListner();
+      searchStore();
+      
+     }
 
-//       var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-// var mapOptions = {
-//   zoom: 4,
-//   center: myLatlng
-// }
-// var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      function searchStore(){
+        
+        const zipCode=document.getElementById('z-code-input');
+        console.log(zipCode);
+        zipCode.addEventListener('click',event=>
+        {if(event.target.classList.contains==='fas fa-search-location'){
+          console.log(event.target.value);
+        }
+      })
+    }
 
-// var marker = new google.maps.Marker({
-//     position: myLatlng,
-//     title:"Hello World!"
-// });
-
-// // To add the marker to the map, call setMap();
-// marker.setMap(map);
     
+      
+        
+     
+
+  function setOnCLickListner(){
+
+    const storeElements=document.querySelectorAll('.store-container');
+    storeElements.forEach((elem,index)=>{
+      elem.addEventListener('click',function(){
+       new google.maps.event.trigger(markers[index], 'click');
+
+      })
+    })
+
   }
   function displayStores(){
     let storesHtml=' ';
     stores.forEach((store,index)=>{
-      // console.log(store,index)
       
-      // var address=store.addressLines;
 
       storesHtml+=` <div class="store-container">
       <div class="store-info-container">
@@ -64,7 +71,6 @@ function initMap() {
      </div>
      </div>`
     })
-
     document.querySelector('.stores-list').innerHTML=storesHtml;
 
     }
@@ -90,8 +96,7 @@ function initMap() {
 
   }
 
-  
-    function createMarker(latlng,name,address,openStatusText,phoneNumber,index) {
+     function createMarker(latlng,name,address,openStatusText,phoneNumber,index) {
       var html = `
       <div class="store-info-window">
       <div class="store-info-name">${name}</div>
@@ -102,16 +107,10 @@ function initMap() {
       <div class="store-info-phonenumber">
       <i class="fas fa-phone-alt"></i>
       ${phoneNumber}
-      
       </div>
-
-
       </div>
-      
-      
-      
-      
       `;
+
       var marker = new google.maps.Marker({
         map: map,
         position: latlng,
@@ -124,10 +123,3 @@ function initMap() {
       markers.push(marker);
     }
   
-
-
-    
-
-
-  
-
