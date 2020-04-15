@@ -14,30 +14,62 @@ function initMap() {
       zoom: 11,
       });
       infoWindow = new google.maps.InfoWindow();
-      displayStores();
-      showStoresMarker();
-      setOnCLickListner();
+      
+      // showStoresMarker();
+      // setOnCLickListner();
       searchStore();
       
      }
 
-      function searchStore(){
-        
-        const zipCode=document.getElementById('z-code-input');
-        console.log(zipCode);
-        zipCode.addEventListener('click',event=>
-        {if(event.target.classList.contains==='fas fa-search-location'){
-          console.log(event.target.value);
+
+     function searchStore(){
+       let foundStore=[];
+      const zipCode=document.getElementById('z-code-input').value;
+      if(zipCode){
+      stores.forEach(store=>{
+        const postal=store.address.postalCode.substring(0,5);
+        // if(postal!==zipCode){
+        //   alert('zipcode entered not found')
+         if(postal===zipCode){
+          foundStore.push(store);
         }
-      })
-    }
+          })
+        }else{
+          foundStore=stores;
+        }
+       displayStores(foundStore);
+       showStoresMarker(foundStore);
+       setOnCLickListner();
+      //  console.log(foundStore);
 
-    
-      
+
+
+     }
+
+    //   function searchStore(){
         
-     
+    //     const zipCode=document.getElementById('z-code-input');
+    //    zipCode.addEventListener('submit',searchZip);
+  
+    // }
 
-  function setOnCLickListner(){
+     // function searchZip(searchBox){
+    //   console.log(searchBox.value);
+    // }
+        
+    // const zipCode=document.getElementById('z-code-input');
+    // const searchIcon = document.getElementById("searchIcon");
+    // searchIcon.addEventListener('click', () => searchZip(zipCode));
+
+
+    // function searchZip(e){
+    //   if(e.target.nextSibling.classList.contains('fas fa-search')){
+    //        console.log(e.target.value);
+    //   }
+  
+    //   }
+
+     function setOnCLickListner(){
 
     const storeElements=document.querySelectorAll('.store-container');
     storeElements.forEach((elem,index)=>{
@@ -48,7 +80,7 @@ function initMap() {
     })
 
   }
-  function displayStores(){
+  function displayStores(stores){
     let storesHtml=' ';
     stores.forEach((store,index)=>{
       
@@ -76,7 +108,7 @@ function initMap() {
     }
   
 
-  function showStoresMarker(){
+  function showStoresMarker(stores){
 
     var bounds = new google.maps.LatLngBounds();
     stores.forEach((store,index)=>{

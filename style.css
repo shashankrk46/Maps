@@ -150,3 +150,7 @@ body{
 .store-info-address i{
     color: skyblue;
 }
+
+.search i{
+    cursor: pointer;
+}
